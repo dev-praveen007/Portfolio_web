@@ -15,9 +15,15 @@
         theme: {
           extend: {
             colors: {
-              accent: '#A3E635',
-              dark: '#0A0A0A',
-              card: '#141414'
+              accent: {
+                DEFAULT: '#86B739',
+                hover: '#A3E23A'
+              },
+              dark: '#0B0B0B',
+              surface: '#111315',
+              'text-primary': '#E6E9E6',
+              'text-muted': '#9AA092',
+              card: '#111315'
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
@@ -28,35 +34,45 @@
       }
     </script>
     <style>
-      * { transition: background-color 0.3s ease-out, border-color 0.3s ease-out; }
-      body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease, color 0.5s ease; overflow-x: hidden; }
-      .dark body { background-color: #0A0A0A; color: #FFFFFF; }
-      body { background-color: #FDFDFD; color: #0A0A0A; }
+      * { transition: background-color 0.3s ease-out, border-color 0.3s ease-out, color 0.3s ease-out; }
+      body { 
+        font-family: 'Inter', sans-serif; 
+        transition: background-color 0.5s ease, color 0.5s ease; 
+        overflow-x: hidden; 
+        font-size: 0.9375rem; 
+      }
+      
+      .dark body { background-color: #0B0B0B; color: #E6E9E6; }
+      body { background-color: #FDFDFD; color: #0B0B0B; }
       
       h1, h2, h3, .font-outfit { font-family: 'Outfit', sans-serif; }
-      .text-neon { color: #A3E635; }
-      .bg-neon { background-color: #A3E635; }
-      .border-neon { border-color: #A3E635; }
       
       .glass-card { 
         background: rgba(255, 255, 255, 0.7); 
-        backdrop-filter: blur(16px); 
+        backdrop-filter: blur(12px); 
         border: 1px solid rgba(0, 0, 0, 0.05); 
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .dark .glass-card { 
-        background: rgba(20, 20, 20, 0.6); 
-        border: 1px solid rgba(255, 255, 255, 0.08); 
+        background: #111315; 
+        border: 1px solid rgba(134, 183, 57, 0.10); 
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
       }
       
-      .scroll-mt-header { scroll-margin-top: 100px; }
-      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+      .scroll-mt-header { scroll-margin-top: 80px; }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
       .animate-float { animation: float 4s ease-in-out infinite; }
       
       ::selection {
-        background-color: #A3E635;
+        background-color: #86B739;
         color: #000;
       }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #0B0B0B; }
+      ::-webkit-scrollbar-thumb { background: #111315; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #86B739; }
     </style>
   <script type="importmap">
 {
