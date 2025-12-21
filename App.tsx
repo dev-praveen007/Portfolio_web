@@ -125,7 +125,7 @@ const ThemeToggle = () => {
         style={{ x: mouseX, y: mouseY }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="relative w-12 h-12 rounded-[18px] bg-white dark:bg-surface border border-black/5 dark:border-white/10 flex items-center justify-center cursor-pointer shadow-[0_8px_30px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_-8px_rgba(134,183,57,0.3)] group overflow-hidden"
+        className="relative w-11 h-11 rounded-[16px] bg-white dark:bg-surface border border-black/5 dark:border-white/10 flex items-center justify-center cursor-pointer shadow-[0_8px_30px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_-8px_rgba(134,183,57,0.3)] group overflow-hidden"
       >
         <AnimatePresence mode="wait">
           <MotionDiv
@@ -137,9 +137,9 @@ const ThemeToggle = () => {
             className="relative z-10"
           >
             {isDark ? (
-              <Moon size={20} className="text-accent fill-accent/10" />
+              <Moon size={18} className="text-accent fill-accent/10" />
             ) : (
-              <Sun size={20} className="text-orange-500 fill-orange-500/10" />
+              <Sun size={18} className="text-orange-500 fill-orange-500/10" />
             )}
           </MotionDiv>
         </AnimatePresence>
@@ -151,15 +151,6 @@ const ThemeToggle = () => {
               : 'radial-gradient(circle at center, rgba(249,115,22,0.1) 0%, transparent 70%)'
           }}
         />
-        <MotionDiv
-          animate={{ rotate: 360 }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-          className="absolute w-full h-full pointer-events-none"
-        >
-          <div className="absolute top-1 left-1/2 -translate-x-1/2">
-            <Sparkles size={6} className={`${isDark ? 'text-accent' : 'text-orange-400'} opacity-40`} />
-          </div>
-        </MotionDiv>
       </MotionDiv>
     </div>
   );
@@ -176,7 +167,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
         whileInView={{ opacity: 1 }}
         className="relative w-full h-full flex items-center justify-center overflow-hidden"
       >
-        <MotionSvg width="180" height="180" viewBox="0 0 200 200" fill="none" className="opacity-20">
+        <MotionSvg width="150" height="150" viewBox="0 0 200 200" fill="none" className="opacity-15">
           <circle cx="100" cy="100" r="80" stroke={accentColor} strokeWidth="1" strokeDasharray="4 4" />
           <MotionDiv 
             animate={{ rotate: 360 }}
@@ -196,7 +187,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
           />
         </MotionSvg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <Database size={80} strokeWidth={0.5} className="text-accent/30 animate-pulse" />
+          <Database size={60} strokeWidth={0.5} className="text-accent/30 animate-pulse" />
         </div>
       </MotionDiv>
     );
@@ -208,24 +199,24 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
         whileInView={{ opacity: 1 }}
         className="relative w-full h-full flex items-center justify-center"
       >
-        <div className="relative glass-card p-6 rounded-2xl border-accent/10 w-48 h-48 flex flex-col gap-3 overflow-hidden opacity-30">
+        <div className="relative glass-card p-4 rounded-2xl border-accent/10 w-36 h-36 flex flex-col gap-2 overflow-hidden opacity-20">
           {[1, 2, 3, 4].map(i => (
             <MotionDiv 
               key={i}
               initial={{ x: -100 }}
               whileInView={{ x: 0 }}
               transition={{ delay: i * 0.15, duration: 1 }}
-              className={`h-2 rounded-full ${i === 1 ? 'bg-accent/40 w-12' : 'bg-dark/10 dark:bg-white/10 w-full'}`}
+              className={`h-1.5 rounded-full ${i === 1 ? 'bg-accent/40 w-10' : 'bg-dark/10 dark:bg-white/10 w-full'}`}
             />
           ))}
           <MotionDiv 
             animate={{ opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 0.8 }}
-            className="w-2 h-4 bg-accent/60 mt-1.5"
+            className="w-1.5 h-3 bg-accent/60 mt-1"
           />
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <Terminal size={80} strokeWidth={0.5} className="text-accent/20" />
+          <Terminal size={60} strokeWidth={0.5} className="text-accent/20" />
         </div>
       </MotionDiv>
     );
@@ -236,7 +227,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
       whileInView={{ opacity: 1 }}
       className="relative w-full h-full flex items-center justify-center"
     >
-      <MotionSvg width="160" height="160" viewBox="0 0 100 100" className="opacity-15">
+      <MotionSvg width="140" height="140" viewBox="0 0 100 100" className="opacity-15">
         <MotionPath
           d="M10,50 Q50,10 90,50 T10,50"
           stroke={accentColor}
@@ -252,7 +243,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
         />
       </MotionSvg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <Layers size={80} strokeWidth={0.5} className="text-accent/20 animate-float" />
+        <Layers size={60} strokeWidth={0.5} className="text-accent/20 animate-float" />
       </div>
     </MotionDiv>
   );
@@ -263,20 +254,8 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
   const lottieHeaderRef = useRef<LottieRefCurrentProps>(null);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleHeaderLogoHover = () => {
-    if (lottieHeaderRef.current) {
-      lottieHeaderRef.current.stop();
-      lottieHeaderRef.current.play();
-    }
-  };
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -287,19 +266,56 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll);
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    navLinks.forEach(link => {
+      const element = document.getElementById(link.href.replace('#', ''));
+      if (element) observer.observe(element);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
+  }, []);
+
+  const handleHeaderLogoHover = () => {
+    if (lottieHeaderRef.current) {
+      lottieHeaderRef.current.stop();
+      lottieHeaderRef.current.play();
+    }
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-black/5 dark:border-white/5 py-2' : 'bg-transparent py-4'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-black/5 dark:border-white/5 py-1.5' : 'bg-transparent py-3'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
         <a 
           href="#about" 
-          className="flex items-center gap-2 group relative"
+          className="flex items-center gap-1.5 group relative"
           onMouseEnter={handleHeaderLogoHover}
         >
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center transition-transform group-hover:rotate-12 shadow-md shadow-accent/20">
-            <Zap className="text-black w-5 h-5" />
+          <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center transition-transform group-hover:rotate-12 shadow-md shadow-accent/20">
+            <Zap className="text-black w-4 h-4" />
           </div>
-          <span className="text-xl font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Alex<span className="text-accent">.</span></span>
-          <div className="absolute -top-3 -right-5 w-8 h-8 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-lg font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Alex<span className="text-accent">.</span></span>
+          <div className="absolute -top-3 -right-5 w-7 h-7 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
             <Lottie 
               lottieRef={lottieHeaderRef}
               autoplay={false}
@@ -309,37 +325,41 @@ const Navbar = () => {
           </div>
         </a>
 
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="text-xs font-semibold text-dark/60 dark:text-text-muted hover:text-accent transition-colors">
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className={`text-[11px] font-semibold transition-all duration-300 ${activeSection === link.href.replace('#', '') ? 'text-accent' : 'text-dark/60 dark:text-text-muted hover:text-accent'}`}
+            >
               {link.name}
             </a>
           ))}
-          <a href="#contact" className="px-5 py-1.5 bg-dark dark:bg-accent text-white dark:text-black font-bold text-xs rounded-full hover:bg-accent-hover transition-all">
+          <a href="#contact" className="px-5 py-1.5 bg-dark dark:bg-accent text-white dark:text-black font-bold text-[11px] rounded-full hover:bg-accent-hover transition-all">
             Hire Me
           </a>
         </div>
 
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-dark dark:text-text-primary p-1.5">
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-dark dark:text-text-primary p-1">
+          {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
       <AnimatePresence>
         {mobileMenuOpen && (
           <MotionDiv 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 right-0 bg-white dark:bg-surface border-b border-black/10 dark:border-white/10 overflow-hidden lg:hidden shadow-xl"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-white/95 dark:bg-surface/95 backdrop-blur-xl border-b border-black/10 dark:border-white/10 overflow-hidden lg:hidden shadow-2xl"
           >
-            <div className="flex flex-col items-center py-8 gap-6">
+            <div className="flex flex-col items-center py-6 gap-5">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-dark/70 dark:text-text-primary hover:text-accent">
+                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className={`text-sm font-bold transition-colors ${activeSection === link.href.replace('#', '') ? 'text-accent' : 'text-dark/70 dark:text-text-primary hover:text-accent'}`}>
                   {link.name}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="px-8 py-2.5 bg-accent text-black font-bold rounded-full text-sm">
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="px-8 py-2 bg-accent text-black font-bold rounded-full text-xs">
                 Contact
               </a>
             </div>
@@ -356,12 +376,12 @@ const SectionHeading = ({ title, subtitle, centered = false }: { title: string; 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`mb-12 ${centered ? 'text-center' : ''}`}
+      className={`mb-10 ${centered ? 'text-center' : ''}`}
     >
-      <h2 className="text-3xl md:text-5xl font-outfit font-extrabold mb-4 leading-tight text-dark dark:text-text-primary">
+      <h2 className="text-2xl md:text-4xl font-outfit font-extrabold mb-3 leading-tight text-dark dark:text-text-primary">
         {title}
       </h2>
-      {subtitle && <p className={`text-dark/40 dark:text-text-muted text-base md:text-lg max-w-3xl ${centered ? 'mx-auto' : ''}`}>{subtitle}</p>}
+      {subtitle && <p className={`text-dark/40 dark:text-text-muted text-sm md:text-base max-w-2xl ${centered ? 'mx-auto' : ''}`}>{subtitle}</p>}
     </MotionDiv>
   );
 };
@@ -369,28 +389,28 @@ const SectionHeading = ({ title, subtitle, centered = false }: { title: string; 
 const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> = ({ project, onOpen }) => {
   return (
     <MotionDiv 
-      whileHover={{ y: -8 }}
-      className="group glass-card rounded-[24px] overflow-hidden border border-black/5 dark:border-white/5 shadow-sm hover:shadow-lg transition-all duration-500"
+      whileHover={{ y: -6 }}
+      className="group glass-card rounded-[20px] overflow-hidden border border-black/5 dark:border-white/5 shadow-sm hover:shadow-lg transition-all duration-500"
     >
       <div className="relative aspect-video overflow-hidden">
         <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-80" />
-        <div className="absolute bottom-4 left-4 flex flex-wrap gap-1.5">
+        <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
           {project.tags.map(tag => (
-            <span key={tag} className="px-2 py-0.5 bg-white/10 backdrop-blur-xl border border-white/10 rounded-md text-[8px] font-bold uppercase tracking-wider text-white">{tag}</span>
+            <span key={tag} className="px-1.5 py-0.5 bg-white/10 backdrop-blur-xl border border-white/10 rounded-md text-[7px] font-bold uppercase tracking-wider text-white">{tag}</span>
           ))}
         </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors text-dark dark:text-text-primary">{project.title}</h3>
-        <p className="text-dark/50 dark:text-text-muted text-xs mb-6 leading-relaxed line-clamp-2">{project.problem}</p>
+      <div className="p-5">
+        <h3 className="text-lg font-bold mb-1.5 group-hover:text-accent transition-colors text-dark dark:text-text-primary">{project.title}</h3>
+        <p className="text-dark/50 dark:text-text-muted text-[11px] mb-5 leading-relaxed line-clamp-2">{project.problem}</p>
         <div className="flex items-center justify-between">
-          <button onClick={() => onOpen(project)} className="text-accent text-xs font-black uppercase tracking-widest flex items-center gap-1.5 group/btn hover:text-accent-hover transition-colors">
-            View Details <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-0.5" />
+          <button onClick={() => onOpen(project)} className="text-accent text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 group/btn hover:text-accent-hover transition-colors">
+            View Details <ArrowRight size={12} className="transition-transform group-hover/btn:translate-x-0.5" />
           </button>
-          <div className="flex gap-3">
-            <a href={project.links.github} className="text-dark/40 dark:text-text-muted hover:text-accent transition-colors"><Github size={16} /></a>
-            <a href={project.links.live} className="text-dark/40 dark:text-text-muted hover:text-accent transition-colors"><ExternalLink size={16} /></a>
+          <div className="flex gap-2.5">
+            <a href={project.links.github} className="text-dark/40 dark:text-text-muted hover:text-accent transition-colors"><Github size={14} /></a>
+            <a href={project.links.live} className="text-dark/40 dark:text-text-muted hover:text-accent transition-colors"><ExternalLink size={14} /></a>
           </div>
         </div>
       </div>
@@ -405,37 +425,37 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
       <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-black/95 backdrop-blur-xl" />
       <MotionDiv 
         initial={{ opacity: 0, y: 40, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 40, scale: 0.95 }}
-        className="relative w-full max-w-4xl bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-[32px] overflow-hidden shadow-2xl z-10 max-h-[85vh] overflow-y-auto"
+        className="relative w-full max-w-3xl bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-[28px] overflow-hidden shadow-2xl z-10 max-h-[85vh] overflow-y-auto"
       >
-        <button onClick={onClose} className="absolute top-6 right-6 p-2.5 bg-dark/5 dark:bg-white/5 hover:bg-dark/10 dark:hover:bg-white/10 rounded-full transition-colors z-20"><X size={18} className="text-dark dark:text-text-primary" /></button>
+        <button onClick={onClose} className="absolute top-5 right-5 p-2 bg-dark/5 dark:bg-white/5 hover:bg-dark/10 dark:hover:bg-white/10 rounded-full transition-colors z-20"><X size={16} className="text-dark dark:text-text-primary" /></button>
         <div className="grid lg:grid-cols-2">
-          <div className="h-full min-h-[300px]">
+          <div className="h-full min-h-[250px]">
             <img src={project.image} className="w-full h-full object-cover" />
           </div>
-          <div className="p-8 md:p-12 space-y-8">
+          <div className="p-6 md:p-10 space-y-6">
             <div>
-              <h2 className="text-3xl font-outfit font-extrabold mb-3 text-dark dark:text-text-primary">{project.title}</h2>
-              <div className="flex flex-wrap gap-2">
-                {project.details.stack.map(s => <span key={s} className="px-2.5 py-0.5 bg-accent/10 border border-accent/20 text-accent text-[9px] font-bold uppercase rounded-md">{s}</span>)}
+              <h2 className="text-2xl font-outfit font-extrabold mb-2 text-dark dark:text-text-primary">{project.title}</h2>
+              <div className="flex flex-wrap gap-1.5">
+                {project.details.stack.map(s => <span key={s} className="px-2 py-0.5 bg-accent/10 border border-accent/20 text-accent text-[8px] font-bold uppercase rounded-md">{s}</span>)}
               </div>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-5">
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-3">The Challenge</h4>
-                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-sm">{project.problem}</p>
+                <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-2">The Challenge</h4>
+                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-xs">{project.problem}</p>
               </div>
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-3">My Solution</h4>
-                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-sm">{project.solution}</p>
+                <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-2">My Solution</h4>
+                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-xs">{project.solution}</p>
               </div>
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-3">Technical Approach</h4>
-                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-sm">{project.details.approach}</p>
+                <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-dark/40 dark:text-text-muted mb-2">Technical Approach</h4>
+                <p className="text-dark/70 dark:text-text-muted leading-relaxed text-xs">{project.details.approach}</p>
               </div>
             </div>
-            <div className="flex gap-3 pt-3">
-              <a href="#" className="flex-1 px-6 py-3 bg-accent text-black font-black uppercase tracking-widest text-xs rounded-xl text-center hover:bg-accent-hover transition-all">Launch Site</a>
-              <a href="#" className="flex-1 px-6 py-3 border border-black/10 dark:border-white/10 text-dark dark:text-text-primary font-black uppercase tracking-widest text-xs rounded-xl text-center hover:bg-dark/5 transition-all">Source Code</a>
+            <div className="flex gap-2.5 pt-2">
+              <a href="#" className="flex-1 px-5 py-2.5 bg-accent text-black font-black uppercase tracking-widest text-[10px] rounded-lg text-center hover:bg-accent-hover transition-all">Launch Site</a>
+              <a href="#" className="flex-1 px-5 py-2.5 border border-black/10 dark:border-white/10 text-dark dark:text-text-primary font-black uppercase tracking-widest text-[10px] rounded-lg text-center hover:bg-dark/5 transition-all">Source Code</a>
             </div>
           </div>
         </div>
@@ -461,47 +481,47 @@ export default function App() {
       <ThemeToggle />
 
       {/* Hero Section */}
-      <MotionSection id="about" className="relative pt-24 lg:pt-36 pb-16 lg:pb-24 overflow-hidden scroll-mt-header">
-        <div className="absolute top-[-15%] right-[-5%] w-[50%] h-[60%] bg-accent/5 blur-[120px] rounded-full -z-10" />
+      <MotionSection id="about" className="relative pt-20 lg:pt-32 pb-14 lg:pb-20 overflow-hidden scroll-mt-header">
+        <div className="absolute top-[-15%] right-[-5%] w-[45%] h-[55%] bg-accent/5 blur-[100px] rounded-full -z-10" />
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
             <MotionDiv initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="relative w-full lg:flex-1 order-1 lg:order-2">
-              <div className="relative z-10 mx-auto w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[480px] aspect-[4/5] bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-[32px] lg:rounded-[64px] overflow-hidden p-2 lg:p-4 group shadow-xl">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover rounded-[24px] lg:rounded-[52px] grayscale group-hover:grayscale-0 transition-all duration-1000" />
+              <div className="relative z-10 mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[400px] aspect-[4/5] bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-[28px] lg:rounded-[56px] overflow-hidden p-1.5 lg:p-3 group shadow-xl">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover rounded-[20px] lg:rounded-[44px] grayscale group-hover:grayscale-0 transition-all duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent pointer-events-none" />
               </div>
-              <div className="absolute -bottom-6 -left-4 lg:-bottom-10 lg:-left-10 glass-card p-5 lg:p-10 rounded-[28px] lg:rounded-[40px] border-accent/20 dark:border-accent/20 animate-float shadow-2xl z-20">
-                <div className="text-2xl lg:text-5xl font-outfit font-black text-accent mb-0.5">10+</div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-dark/40 dark:text-text-muted">Production Apps Deployed</div>
+              <div className="absolute -bottom-4 -left-3 lg:-bottom-6 lg:-left-6 glass-card p-4 lg:p-8 rounded-[20px] lg:rounded-[32px] border-accent/20 dark:border-accent/20 animate-float shadow-2xl z-20">
+                <div className="text-xl lg:text-4xl font-outfit font-black text-accent mb-0.5">10+</div>
+                <div className="text-[7px] font-black uppercase tracking-widest text-dark/40 dark:text-text-muted">Production Apps Deployed</div>
               </div>
             </MotionDiv>
 
-            <div className="flex-1 space-y-5 lg:space-y-10 order-2 lg:order-1 text-center lg:text-left">
-              <MotionDiv initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2.5 justify-center lg:justify-start">
-                <div className="w-8 lg:w-14 h-[1px] bg-accent" />
-                <span className="text-[10px] lg:text-sm font-black uppercase tracking-[0.2em] text-accent">3+ Years of Experience</span>
+            <div className="flex-1 space-y-4 lg:space-y-8 order-2 lg:order-1 text-center lg:text-left">
+              <MotionDiv initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 justify-center lg:justify-start">
+                <div className="w-6 lg:w-10 h-[1px] bg-accent" />
+                <span className="text-[9px] lg:text-xs font-black uppercase tracking-[0.2em] text-accent">3+ Years of Experience</span>
               </MotionDiv>
               <MotionH1 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-6xl lg:text-8xl font-outfit font-extrabold leading-[0.95] tracking-tighter text-dark dark:text-text-primary"
+                className="text-3xl md:text-5xl lg:text-7xl font-outfit font-extrabold leading-[0.95] tracking-tighter text-dark dark:text-text-primary"
               >
                 Building <br /> <span className="text-accent">Robust</span> Digital Experiences.
               </MotionH1>
               <MotionP 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                className="text-base md:text-lg lg:text-xl text-dark/40 dark:text-text-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+                className="text-sm md:text-base lg:text-lg text-dark/40 dark:text-text-muted max-w-xl mx-auto lg:mx-0 leading-relaxed"
               >
                 I'm Alex, a Senior Full-Stack Developer crafting high-performance, scalable web applications with a focus on clean architecture and user-centric design.
               </MotionP>
               <MotionDiv 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                className="flex flex-wrap gap-4 lg:gap-6 justify-center lg:justify-start"
+                className="flex flex-wrap gap-3 lg:gap-5 justify-center lg:justify-start"
               >
-                <a href="#projects" className="px-8 lg:px-10 py-3.5 lg:py-5 bg-accent text-black font-black uppercase tracking-[0.1em] text-[10px] lg:text-xs rounded-xl hover:bg-accent-hover hover:shadow-lg transition-all flex items-center gap-3">
-                  View Case Studies <ArrowRight size={16} />
+                <a href="#projects" className="px-6 lg:px-8 py-3 lg:py-4 bg-accent text-black font-black uppercase tracking-[0.1em] text-[9px] lg:text-[10px] rounded-lg hover:bg-accent-hover hover:shadow-lg transition-all flex items-center gap-2.5">
+                  View Case Studies <ArrowRight size={14} />
                 </a>
-                <a href="#contact" className="px-8 lg:px-10 py-3.5 lg:py-5 border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-dark dark:text-text-primary font-black uppercase tracking-[0.1em] text-[10px] lg:text-xs rounded-xl transition-all flex items-center gap-3">
-                  Hire Me <Mail size={16} />
+                <a href="#contact" className="px-6 lg:px-8 py-3 lg:py-4 border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-dark dark:text-text-primary font-black uppercase tracking-[0.1em] text-[9px] lg:text-[10px] rounded-lg transition-all flex items-center gap-2.5">
+                  Hire Me <Mail size={14} />
                 </a>
               </MotionDiv>
             </div>
@@ -510,8 +530,8 @@ export default function App() {
       </MotionSection>
 
       {/* Quick Stats Bar */}
-      <section className="py-12 lg:py-20 border-y border-black/5 dark:border-white/5 bg-black/[0.01] dark:bg-white/[0.01]">
-        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-14 text-center max-w-7xl">
+      <section className="py-10 lg:py-16 border-y border-black/5 dark:border-white/5 bg-black/[0.01] dark:bg-white/[0.01]">
+        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 text-center max-w-7xl">
           {[
             { label: 'Years Experience', val: '3+' },
             { label: 'Major Tech Stack', val: 'T3 / MERN' },
@@ -519,18 +539,18 @@ export default function App() {
             { label: 'GitHub Stars', val: '500+' }
           ].map((stat, i) => (
             <div key={i}>
-              <div className="text-3xl lg:text-5xl font-outfit font-black text-accent mb-1.5">{stat.val}</div>
-              <div className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-dark/30 dark:text-text-muted">{stat.label}</div>
+              <div className="text-2xl lg:text-4xl font-outfit font-black text-accent mb-1">{stat.val}</div>
+              <div className="text-[8px] lg:text-[10px] font-black uppercase tracking-widest text-dark/30 dark:text-text-muted">{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Tech Stack Marquee */}
-      <section className="py-4 lg:py-8 overflow-hidden bg-accent border-y border-black/5">
-        <div className="flex gap-14 lg:gap-24 animate-marquee items-center">
+      <section className="py-3 lg:py-6 overflow-hidden bg-accent border-y border-black/5">
+        <div className="flex gap-10 lg:gap-18 animate-marquee items-center">
           {[...TECH_TILES, ...TECH_TILES].map((tech, i) => (
-            <div key={i} className="text-xl lg:text-3xl font-outfit font-black text-black uppercase opacity-90 flex items-center gap-8 lg:gap-14">
+            <div key={i} className="text-lg lg:text-2xl font-outfit font-black text-black uppercase opacity-90 flex items-center gap-6 lg:gap-10">
               {tech} <span className="text-xs lg:text-sm">✦</span>
             </div>
           ))}
@@ -538,13 +558,13 @@ export default function App() {
       </section>
 
       {/* Featured Projects */}
-      <section id="projects" className="py-20 lg:py-40 scroll-mt-header">
+      <section id="projects" className="py-16 lg:py-32 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
           <SectionHeading 
             title="Selected Projects" 
             subtitle="A curated list of technical challenges solved through innovative engineering and design."
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
             {PROJECTS.map((project) => (
               <ProjectCard key={project.id} project={project} onOpen={(p) => setSelectedProject(p)} />
             ))}
@@ -553,34 +573,34 @@ export default function App() {
       </section>
 
       {/* Skills Grid */}
-      <section id="skills" className="py-20 lg:py-40 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/5 dark:border-white/5 scroll-mt-header">
+      <section id="skills" className="py-16 lg:py-32 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/5 dark:border-white/5 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
           <SectionHeading title="Technical Mastery" subtitle="Progress bars represent time spent using each technology relative to total experience (3y 4m)." centered />
-          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-10">
             {SKILL_GROUPS.map((group, i) => (
-              <div key={i} className="glass-card p-8 lg:p-12 rounded-[40px] border border-black/5 dark:border-white/5 space-y-8 lg:space-y-12 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
-                <h3 className="text-2xl lg:text-4xl font-outfit font-extrabold text-accent">{group.category}</h3>
-                <div className="space-y-6 lg:space-y-10">
+              <div key={i} className="glass-card p-6 lg:p-10 rounded-[32px] border border-black/5 dark:border-white/5 space-y-6 lg:space-y-10 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
+                <h3 className="text-xl lg:text-3xl font-outfit font-extrabold text-accent">{group.category}</h3>
+                <div className="space-y-5 lg:space-y-8">
                   {group.skills.map((skill, si) => {
                     const progress = (skill.experienceMonths / TOTAL_EXPERIENCE_MONTHS) * 100;
                     return (
                       <div key={si} className="group">
-                        <div className="flex justify-between items-center mb-3 lg:mb-5">
-                          <div className="flex items-center gap-4 lg:gap-6">
-                            <div className="w-10 h-10 lg:w-12 lg:h-12 p-2.5 lg:p-3 bg-black/[0.03] dark:bg-white/[0.05] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 border border-transparent dark:group-hover:border-accent/10">
+                        <div className="flex justify-between items-center mb-2.5 lg:mb-4">
+                          <div className="flex items-center gap-3 lg:gap-4">
+                            <div className="w-8 h-8 lg:w-10 lg:h-10 p-1.5 lg:p-2 bg-black/[0.03] dark:bg-white/[0.05] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 border border-transparent dark:group-hover:border-accent/10">
                                 <img src={skill.logoUrl} alt={skill.name} className="w-full h-full object-contain" />
                             </div>
-                            <span className="font-bold text-base lg:text-xl text-dark dark:text-text-primary">{skill.name}</span>
+                            <span className="font-bold text-sm lg:text-lg text-dark dark:text-text-primary">{skill.name}</span>
                           </div>
-                          <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-dark/40 dark:text-text-muted">{skill.context}</span>
+                          <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-dark/40 dark:text-text-muted">{skill.context}</span>
                         </div>
-                        <div className="h-1.5 lg:h-2 bg-black/[0.04] dark:bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-1 lg:h-1.5 bg-black/[0.04] dark:bg-white/5 rounded-full overflow-hidden">
                           <MotionDiv 
                             initial={{ width: 0 }} 
                             whileInView={{ width: `${progress}%` }} 
                             viewport={{ once: true }} 
                             transition={{ duration: 2, ease: "easeOut", delay: si * 0.1 }}
-                            className="h-full bg-accent shadow-[0_0_12px_rgba(134,183,57,0.3)]" 
+                            className="h-full bg-accent shadow-[0_0_10px_rgba(134,183,57,0.3)]" 
                           />
                         </div>
                       </div>
@@ -594,42 +614,43 @@ export default function App() {
       </section>
 
       {/* Experience Timeline */}
-      <section id="experience" className="py-20 lg:py-40 scroll-mt-header relative overflow-hidden">
+      <section id="experience" className="py-16 lg:py-32 scroll-mt-header relative overflow-hidden">
         <div className="absolute top-1/4 left-10 opacity-[0.03] rotate-12 hidden xl:block text-dark dark:text-text-primary">
-          <Cpu size={300} strokeWidth={1} />
+          <Cpu size={250} strokeWidth={1} />
         </div>
         <div className="absolute bottom-1/4 right-10 opacity-[0.03] -rotate-12 hidden xl:block text-dark dark:text-text-primary">
-          <Globe size={300} strokeWidth={1} />
+          <Globe size={250} strokeWidth={1} />
         </div>
         <div className="container mx-auto px-6 max-w-6xl relative z-10">
           <SectionHeading title="Experience" centered />
-          <div className="space-y-12 lg:space-y-24 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark/10 dark:before:via-white/10 before:to-transparent">
+          <div className="space-y-10 lg:space-y-20 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark/10 dark:before:via-white/10 before:to-transparent">
             {EXPERIENCES.map((exp, i) => (
               <MotionDiv 
                 key={i} 
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
               >
-                <div className="flex items-center justify-center w-10 h-10 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-surface shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 -translate-x-1/2 z-10">
-                   <div className="w-2.5 h-2.5 bg-accent rounded-full animate-pulse shadow-[0_0_12px_rgba(134,183,57,0.8)]" />
+                <div className="flex items-center justify-center w-8 h-8 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-surface shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 -translate-x-1/2 z-10">
+                   <div className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_10px_rgba(134,183,57,0.8)]" />
                 </div>
-                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-4rem)] glass-card p-8 lg:p-14 rounded-[40px] border border-black/5 dark:border-white/5 ml-14 md:ml-0 hover:border-accent/40 transition-all duration-500 shadow-xl">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                    <h4 className="text-xl lg:text-3xl font-outfit font-black text-dark dark:text-text-primary leading-tight">{exp.role}</h4>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-accent bg-accent/10 px-4 py-2 rounded-xl w-fit border border-accent/5">{exp.period}</span>
+                {/* Wider containers as requested: reduced horizontal subtraction */}
+                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] glass-card p-6 lg:p-10 rounded-[32px] border border-black/5 dark:border-white/5 ml-10 md:ml-0 hover:border-accent/40 transition-all duration-500 shadow-xl">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                    <h4 className="text-lg lg:text-2xl font-outfit font-black text-dark dark:text-text-primary leading-tight">{exp.role}</h4>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-lg w-fit border border-accent/5">{exp.period}</span>
                   </div>
-                  <div className="text-dark/40 dark:text-text-muted font-bold mb-8 flex items-center gap-3 text-base lg:text-lg">
-                    <Terminal size={22} className="text-accent" /> {exp.company}
+                  <div className="text-dark/40 dark:text-text-muted font-bold mb-6 flex items-center gap-2.5 text-sm lg:text-base">
+                    <Terminal size={18} className="text-accent" /> {exp.company}
                   </div>
-                  <ul className="space-y-5 lg:space-y-6">
+                  <ul className="space-y-4 lg:space-y-5">
                     {exp.impact.map((point, pi) => (
-                      <li key={pi} className="flex gap-5 lg:gap-6 text-sm lg:text-base text-dark/60 dark:text-text-muted leading-relaxed">
-                        <CheckCircle2 size={20} className="text-accent shrink-0 mt-0.5" /> {point}
+                      <li key={pi} className="flex gap-4 lg:gap-5 text-[11px] lg:text-sm text-dark/60 dark:text-text-muted leading-relaxed">
+                        <CheckCircle2 size={16} className="text-accent shrink-0 mt-0.5" /> {point}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="hidden md:flex md:w-[calc(50%-4rem)] items-center justify-center p-10 select-none pointer-events-none">
+                <div className="hidden md:flex md:w-[calc(50%-1.5rem)] items-center justify-center p-8 select-none pointer-events-none">
                   <ExperienceDecoration type={i % 3} />
                 </div>
               </MotionDiv>
@@ -639,26 +660,26 @@ export default function App() {
       </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-20 lg:py-40 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/5 dark:border-white/5 scroll-mt-header">
+      <section id="blog" className="py-16 lg:py-32 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/5 dark:border-white/5 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 lg:gap-10 mb-16 lg:mb-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 lg:gap-8 mb-12 lg:mb-20">
             <SectionHeading title="Writings" subtitle="Sharing insights on software architecture, performance, and the future of the web." />
-            <a href="#" className="flex items-center gap-3 text-accent font-black uppercase tracking-widest text-[11px] lg:text-sm hover:gap-6 transition-all mb-8 lg:mb-24 hover:text-accent-hover">View All Posts <ArrowRight size={20} /></a>
+            <a href="#" className="flex items-center gap-2 text-accent font-black uppercase tracking-widest text-[10px] lg:text-xs hover:gap-5 transition-all mb-6 lg:mb-20 hover:text-accent-hover">View All Posts <ArrowRight size={16} /></a>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
             {BLOG_POSTS.map((post) => (
-              <MotionDiv key={post.id} whileHover={{ y: -12 }} className="glass-card p-8 lg:p-12 rounded-[48px] border border-black/5 dark:border-white/5 space-y-8 lg:space-y-10 flex flex-col justify-between shadow-sm hover:shadow-2xl duration-500">
-                <div className="space-y-6 lg:space-y-8">
-                  <div className="flex items-center gap-5 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] text-dark/30 dark:text-text-muted">
+              <MotionDiv key={post.id} whileHover={{ y: -10 }} className="glass-card p-6 lg:p-10 rounded-[40px] border border-black/5 dark:border-white/5 space-y-6 lg:space-y-8 flex flex-col justify-between shadow-sm hover:shadow-2xl duration-500">
+                <div className="space-y-5 lg:space-y-7">
+                  <div className="flex items-center gap-4 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-dark/30 dark:text-text-muted">
                     <span>{post.date}</span>
-                    <div className="w-1.5 h-1.5 bg-black/10 dark:bg-white/10 rounded-full" />
+                    <div className="w-1 h-1 bg-black/10 dark:bg-white/10 rounded-full" />
                     <span>{post.readTime}</span>
                   </div>
-                  <h4 className="text-xl lg:text-3xl font-outfit font-bold leading-snug hover:text-accent transition-colors cursor-pointer text-dark dark:text-text-primary">{post.title}</h4>
-                  <p className="text-dark/40 dark:text-text-muted text-sm lg:text-base leading-relaxed line-clamp-3">{post.excerpt}</p>
+                  <h4 className="text-lg lg:text-2xl font-outfit font-bold leading-snug hover:text-accent transition-colors cursor-pointer text-dark dark:text-text-primary">{post.title}</h4>
+                  <p className="text-dark/40 dark:text-text-muted text-xs lg:text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
                 </div>
-                <button className="flex items-center gap-3 text-dark/60 dark:text-text-muted text-[11px] font-bold uppercase tracking-widest group hover:text-accent transition-colors">
-                  Read Article <BookOpen size={16} className="transition-transform group-hover:scale-110" />
+                <button className="flex items-center gap-2 text-dark/60 dark:text-text-muted text-[10px] font-bold uppercase tracking-widest group hover:text-accent transition-colors">
+                  Read Article <BookOpen size={14} className="transition-transform group-hover:scale-110" />
                 </button>
               </MotionDiv>
             ))}
@@ -667,49 +688,49 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 lg:py-40 scroll-mt-header">
+      <section id="contact" className="py-16 lg:py-32 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="max-w-6xl mx-auto bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[48px] lg:rounded-[64px] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
-            <div className="flex-1 p-10 md:p-16 lg:p-24 bg-accent text-black space-y-12 lg:space-y-16">
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-outfit font-black leading-[0.85] tracking-tighter text-center lg:text-left">Let's build <br className="hidden lg:block" /> something <br className="hidden lg:block" /> great.</h2>
-              <p className="text-black/60 text-lg lg:text-xl font-medium leading-relaxed text-center lg:text-left">I'm currently available for freelance projects or full-time roles. If you have a project that needs a technical touch, let's talk.</p>
-              <div className="space-y-8 lg:space-y-10 flex flex-col items-center lg:items-start">
-                <div className="flex items-center gap-6 lg:gap-8 group cursor-pointer w-fit">
-                  <div className="w-14 h-14 lg:w-20 lg:h-20 bg-black rounded-[28px] lg:rounded-[36px] flex items-center justify-center group-hover:rotate-12 transition-transform shadow-xl">
-                    <Mail size={32} className="text-accent" />
+          <div className="max-w-6xl mx-auto bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[40px] lg:rounded-[56px] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
+            <div className="flex-1 p-8 md:p-12 lg:p-20 bg-accent text-black space-y-10 lg:space-y-14">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-outfit font-black leading-[0.85] tracking-tighter text-center lg:text-left">Let's build <br className="hidden lg:block" /> something <br className="hidden lg:block" /> great.</h2>
+              <p className="text-black/60 text-base lg:text-lg font-medium leading-relaxed text-center lg:text-left">I'm currently available for freelance projects or full-time roles. If you have a project that needs a technical touch, let's talk.</p>
+              <div className="space-y-7 lg:space-y-8 flex flex-col items-center lg:items-start">
+                <div className="flex items-center gap-5 lg:gap-6 group cursor-pointer w-fit">
+                  <div className="w-12 h-12 lg:w-16 lg:h-16 bg-black rounded-[20px] lg:rounded-[28px] flex items-center justify-center group-hover:rotate-12 transition-transform shadow-xl">
+                    <Mail size={24} className="text-accent" />
                   </div>
                   <div>
-                    <div className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-black/40">Email Me</div>
-                    <div className="text-xl lg:text-3xl font-bold font-outfit">alex@rivera.dev</div>
+                    <div className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-black/40">Email Me</div>
+                    <div className="text-lg lg:text-2xl font-bold font-outfit text-black">alex@rivera.dev</div>
                   </div>
                 </div>
-                <div className="flex gap-5">
+                <div className="flex gap-4">
                   {[Github, Linkedin, Mail].map((Icon, i) => (
-                    <a key={i} href="#" className="w-14 h-14 lg:w-18 lg:h-18 border-2 border-black/10 rounded-2xl lg:rounded-[28px] flex items-center justify-center hover:bg-black hover:text-accent transition-all duration-300 shadow-sm">
-                      <Icon size={26} />
+                    <a key={i} href="#" className="w-12 h-12 lg:w-14 lg:h-14 border-2 border-black/10 rounded-xl lg:rounded-[20px] flex items-center justify-center hover:bg-black hover:text-accent transition-all duration-300 shadow-sm">
+                      <Icon size={20} />
                     </a>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="flex-[1.4] p-10 md:p-16 lg:p-24 bg-white dark:bg-surface">
-              <form className="space-y-10 lg:space-y-12" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
-                  <div className="space-y-3 lg:space-y-4">
-                    <label className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Your Name</label>
-                    <input type="text" className="w-full bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10 py-4 lg:py-5 focus:outline-none focus:border-accent transition-colors font-medium text-base lg:text-lg text-dark dark:text-text-primary" placeholder="Jane Doe" />
+            <div className="flex-[1.4] p-8 md:p-12 lg:p-20 bg-white dark:bg-surface">
+              <form className="space-y-8 lg:space-y-10" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                  <div className="space-y-2.5 lg:space-y-3">
+                    <label className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Your Name</label>
+                    <input type="text" className="w-full bg-black/[0.01] dark:bg-white/[0.01] border-b border-black/10 dark:border-white/10 py-3 lg:py-4 focus:outline-none focus:border-accent transition-colors font-medium text-xs lg:text-sm text-dark dark:text-text-primary" placeholder="Jane Doe" />
                   </div>
-                  <div className="space-y-3 lg:space-y-4">
-                    <label className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Email Address</label>
-                    <input type="email" className="w-full bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10 py-4 lg:py-5 focus:outline-none focus:border-accent transition-colors font-medium text-base lg:text-lg text-dark dark:text-text-primary" placeholder="jane@example.com" />
+                  <div className="space-y-2.5 lg:space-y-3">
+                    <label className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Email Address</label>
+                    <input type="email" className="w-full bg-black/[0.01] dark:bg-white/[0.01] border-b border-black/10 dark:border-white/10 py-3 lg:py-4 focus:outline-none focus:border-accent transition-colors font-medium text-xs lg:text-sm text-dark dark:text-text-primary" placeholder="jane@example.com" />
                   </div>
                 </div>
-                <div className="space-y-3 lg:space-y-4">
-                  <label className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Project Details</label>
-                  <textarea rows={4} className="w-full bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10 py-4 lg:py-5 focus:outline-none focus:border-accent transition-colors font-medium resize-none text-base lg:text-lg text-dark dark:text-text-primary" placeholder="Tell me about your vision..."></textarea>
+                <div className="space-y-2.5 lg:space-y-3">
+                  <label className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">Project Details</label>
+                  <textarea rows={3} className="w-full bg-black/[0.01] dark:bg-white/[0.01] border-b border-black/10 dark:border-white/10 py-3 lg:py-4 focus:outline-none focus:border-accent transition-colors font-medium resize-none text-xs lg:text-sm text-dark dark:text-text-primary" placeholder="Tell me about your vision..."></textarea>
                 </div>
-                <button type="submit" className="w-full py-6 lg:py-9 bg-dark dark:bg-accent text-white dark:text-black font-black uppercase tracking-[0.2em] text-[11px] lg:text-sm rounded-3xl flex items-center justify-center gap-5 hover:bg-accent-hover hover:shadow-2xl transition-all duration-500">
-                  Send Inquiry <Send size={20} />
+                <button type="submit" className="w-full py-5 lg:py-7 bg-dark dark:bg-accent text-white dark:text-black font-black uppercase tracking-[0.2em] text-[10px] lg:text-xs rounded-2xl flex items-center justify-center gap-4 hover:bg-accent-hover hover:shadow-2xl transition-all duration-500">
+                  Send Inquiry <Send size={16} />
                 </button>
               </form>
             </div>
@@ -718,18 +739,18 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 lg:py-24 border-t border-black/5 dark:border-white/5">
+      <footer className="py-12 lg:py-20 border-t border-black/5 dark:border-white/5">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10 lg:gap-14">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 lg:gap-12">
             <div 
-              className="flex items-center gap-3 group relative cursor-pointer"
+              className="flex items-center gap-2 group relative cursor-pointer"
               onMouseEnter={handleFooterLogoHover}
             >
-              <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center transition-transform group-hover:rotate-6 shadow-md shadow-accent/20">
-                <Zap size={24} className="text-black" />
+              <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center transition-transform group-hover:rotate-6 shadow-md shadow-accent/20">
+                <Zap size={20} className="text-black" />
               </div>
-              <span className="text-2xl font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Alex<span className="text-accent">.</span></span>
-              <div className="absolute -top-6 -right-8 w-14 h-14 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-xl font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Alex<span className="text-accent">.</span></span>
+              <div className="absolute -top-5 -right-6 w-10 h-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
                 <Lottie 
                   lottieRef={lottieFooterRef}
                   autoplay={false}
@@ -738,12 +759,12 @@ export default function App() {
                 />
               </div>
             </div>
-            <div className="flex gap-10 lg:gap-14 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">
+            <div className="flex gap-8 lg:gap-12 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/30 dark:text-text-muted">
               <a href="#" className="hover:text-accent transition-colors">Dribbble</a>
               <a href="#" className="hover:text-accent transition-colors">Behance</a>
               <a href="#" className="hover:text-accent transition-colors">Product Hunt</a>
             </div>
-            <div className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-dark/20 dark:text-text-muted/20">
+            <div className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/20 dark:text-text-muted/20">
               © 2024 Alex Rivera. All Rights Reserved.
             </div>
           </div>
@@ -768,7 +789,7 @@ export default function App() {
         }
         @keyframes float {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-12px); }
+          50% { transform: translateY(-10px); }
         }
         .animate-float {
           animation: float 4s ease-in-out infinite;
