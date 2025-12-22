@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alex Rivera | Senior Full-Stack Engineer</title>
+    <title>Praveen | Senior Full-Stack Engineer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2230%22 fill=%22%2386B739%22/><text x=%2250%%22 y=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-family=%22Outfit, sans-serif%22 font-weight=%22800%22 font-size=%2260%22 fill=%22black%22>%23</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,15 +42,27 @@
         font-size: 0.9375rem; 
       }
       
+      body { background-color: #F8F9FA; color: #0B0B0B; position: relative; }
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: radial-gradient(#86B73911 1px, transparent 1px);
+        background-size: 32px 32px;
+        z-index: -1;
+        opacity: 0.5;
+      }
+      
       .dark body { background-color: #0B0B0B; color: #E6E9E6; }
-      body { background-color: #FDFDFD; color: #0B0B0B; }
+      .dark body::before { opacity: 0.1; }
       
       h1, h2, h3, .font-outfit { font-family: 'Outfit', sans-serif; }
       
       .glass-card { 
-        background: rgba(255, 255, 255, 0.7); 
+        background: rgba(255, 255, 255, 0.95); 
         backdrop-filter: blur(12px); 
-        border: 1px solid rgba(0, 0, 0, 0.05); 
+        border: 1px solid rgba(0, 0, 0, 0.1); 
+        box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.06);
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .dark .glass-card { 
@@ -59,6 +71,71 @@
         box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
       }
       
+      /* Refined Input fields for contact form */
+      .contact-input {
+        background: rgba(0, 0, 0, 0.04);
+        border: 1.5px solid rgba(0, 0, 0, 0.08);
+        border-radius: 1rem;
+        padding: 0.875rem 1.25rem;
+        width: 100%;
+        display: block;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        color: #0B0B0B;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+      }
+      
+      .dark .contact-input {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1.5px solid rgba(255, 255, 255, 0.08);
+        color: #F8F9FA;
+      }
+      
+      .contact-input::placeholder {
+        color: rgba(0, 0, 0, 0.3);
+      }
+      
+      .dark .contact-input::placeholder {
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      .contact-input:hover {
+        border-color: rgba(134, 183, 57, 0.4);
+        background: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 12px rgba(134, 183, 57, 0.05);
+      }
+      
+      .dark .contact-input:hover {
+        background: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 4px 12px rgba(134, 183, 57, 0.1);
+      }
+
+      .contact-input:focus {
+        background: #FFFFFF;
+        border-color: #86B739;
+        box-shadow: 0 0 0 4px rgba(134, 183, 57, 0.15), 0 8px 24px -8px rgba(134, 183, 57, 0.2);
+        outline: none;
+      }
+      
+      .dark .contact-input:focus {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: #86B739;
+        box-shadow: 0 0 0 4px rgba(134, 183, 57, 0.2), 0 12px 32px -12px rgba(134, 183, 57, 0.5);
+      }
+      
+      /* Glow for buttons and interactive items */
+      .glow-on-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .glow-on-hover:hover {
+        box-shadow: 0 0 20px 2px rgba(134, 183, 57, 0.4), 0 0 40px 4px rgba(134, 183, 57, 0.15);
+        filter: brightness(1.05);
+      }
+      .dark .glow-on-hover:hover {
+        box-shadow: 0 0 25px 4px rgba(134, 183, 57, 0.5), 0 0 50px 8px rgba(134, 183, 57, 0.2);
+      }
+
       .scroll-mt-header { scroll-margin-top: 80px; }
       @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
       .animate-float { animation: float 4s ease-in-out infinite; }
@@ -68,7 +145,6 @@
         color: #000;
       }
 
-      /* Scrollbar */
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: #0B0B0B; }
       ::-webkit-scrollbar-thumb { background: #111315; border-radius: 10px; }
