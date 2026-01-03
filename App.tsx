@@ -29,6 +29,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { PROJECTS, SKILL_GROUPS, EXPERIENCES, BLOG_POSTS, TECH_TILES, TOTAL_EXPERIENCE_MONTHS } from './constants';
 import { Project } from './types';
+import Profile from './assets/Picsart_24-10-10_19-39-02-380.jpg';
 
 // --- Typed Motion Components ---
 const MotionDiv = motion.div as any;
@@ -486,7 +487,7 @@ export default function App() {
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
             <MotionDiv initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="relative w-full lg:flex-1 order-1 lg:order-2">
               <div className="relative z-10 mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w dependency-container rounded-[28px] lg:rounded-[56px] overflow-hidden p-1.5 lg:p-3 group shadow-xl">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover rounded-[20px] lg:rounded-[44px] grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" />
+                <img src={Profile} className="w-full h-full object-cover rounded-[20px] lg:rounded-[44px] grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent pointer-events-none" />
               </div>
               <div className="absolute -bottom-4 -left-3 lg:-bottom-6 lg:-left-6 glass-card p-4 lg:p-8 rounded-[20px] lg:rounded-[32px] border-accent/30 dark:border-accent/20 animate-float shadow-2xl z-20">
@@ -530,12 +531,12 @@ export default function App() {
 
       {/* Quick Stats Bar */}
       <section className="py-10 lg:py-16 border-y border-black/10 dark:border-white/5 bg-white/50 dark:bg-white/[0.01]">
-        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 text-center max-w-7xl">
+        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10 text-center max-w-7xl">
           {[
             { label: 'Years Experience', val: '3+' },
-            { label: 'Major Tech Stack', val: 'T3 / MERN' },
-            { label: 'Success Rate', val: '99%' },
-            { label: 'GitHub Stars', val: '500+' }
+            { label: 'Major Tech Stack', val: 'MERN' },
+            { label: 'Projects', val: '20+' },
+            // { label: 'GitHub Stars', val: '500+' }
           ].map((stat, i) => (
             <div key={i}>
               <div className="text-2xl lg:text-4xl font-outfit font-black text-accent mb-1">{stat.val}</div>
@@ -591,9 +592,9 @@ export default function App() {
                             </div>
                             <span className="font-bold text-sm lg:text-lg text-dark dark:text-text-primary">{skill.name}</span>
                           </div>
-                          <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-dark/60 dark:text-text-muted">{skill.context}</span>
+                          {/* <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-dark/60 dark:text-text-muted">{skill.context}</span> */}
                         </div>
-                        <div className="h-1 lg:h-1.5 bg-black/[0.08] dark:bg-white/5 rounded-full overflow-hidden">
+                        {/* <div className="h-1 lg:h-1.5 bg-black/[0.08] dark:bg-white/5 rounded-full overflow-hidden">
                           <MotionDiv 
                             initial={{ width: 0 }} 
                             whileInView={{ width: `${progress}%` }} 
@@ -601,7 +602,7 @@ export default function App() {
                             transition={{ duration: 2, ease: "easeOut", delay: si * 0.1 }}
                             className="h-full bg-accent shadow-[0_0_10px_rgba(134,183,57,0.4)]" 
                           />
-                        </div>
+                        </div> */}
                       </div>
                     );
                   })}
@@ -658,7 +659,7 @@ export default function App() {
       </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-16 lg:py-32 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/10 dark:border-white/5 scroll-mt-header">
+      {/* <section id="blog" className="py-16 lg:py-32 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/10 dark:border-white/5 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 lg:gap-8 mb-12 lg:mb-20">
             <SectionHeading title="Writings" subtitle="Sharing insights on software architecture, performance, and the future of the web." />
@@ -683,7 +684,7 @@ export default function App() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section id="contact" className="py-16 lg:py-32 scroll-mt-header">
@@ -699,7 +700,7 @@ export default function App() {
                   </div>
                   <div>
                     <div className="text-[8px] lg:text-[9px] font-black uppercase tracking-widest text-black/50">Email Me</div>
-                    <div className="text-base lg:text-xl font-bold font-outfit text-black">praveen@dev.io</div>
+                    <div className="text-base lg:text-xl font-bold font-outfit text-black">praveenannadurai201@gmail.com</div>
                   </div>
                 </div>
               </div>
@@ -729,7 +730,8 @@ export default function App() {
                 {[Github, Linkedin, Mail].map((Icon, i) => (
                   <a 
                     key={i} 
-                    href="#" 
+                    target="__blank"
+                    href={i === 0 ? "https://github.com/dev-praveen007" : i === 1 ? "https://www.linkedin.com/in/praveen-annadurai" : "mailto:praveenannadurai201@gmail.com" } 
                     className="w-12 h-12 border border-black/10 dark:border-accent/20 rounded-2xl flex items-center justify-center bg-white dark:bg-black/20 hover:bg-black hover:text-accent text-dark/60 dark:text-text-muted transition-all duration-300 shadow-sm hover:scale-110 active:scale-95 group glow-on-hover"
                   >
                     <Icon size={20} className="transition-colors" />
@@ -762,13 +764,13 @@ export default function App() {
                 />
               </div>
             </div>
-            <div className="flex gap-8 lg:gap-12 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/60 dark:text-text-muted">
+            {/* <div className="flex gap-8 lg:gap-12 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/60 dark:text-text-muted">
               <a href="#" className="hover:text-accent transition-colors">Dribbble</a>
               <a href="#" className="hover:text-accent transition-colors">Behance</a>
               <a href="#" className="hover:text-accent transition-colors">Product Hunt</a>
-            </div>
+            </div> */}
             <div className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] text-dark/40 dark:text-text-muted/20 font-medium">
-              © 2024 Praveen Rivera. All Rights Reserved.
+              © 2026 Praveen. All Rights Reserved.
             </div>
           </div>
         </div>

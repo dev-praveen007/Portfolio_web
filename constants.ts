@@ -1,4 +1,5 @@
-
+import React from "react"
+import { getMonthDifference, getYearMonthDiff } from './common';
 import { Project, SkillGroup, Experience, GithubRepo } from './types';
 
 export const TOTAL_EXPERIENCE_MONTHS = 40; // 3 years 4 months
@@ -53,26 +54,26 @@ export const SKILL_GROUPS: SkillGroup[] = [
     category: 'Frontend',
     skills: [
       { 
-        name: 'React / Next.js', 
-        context: '3+ Years', 
+        name: 'React', 
+        context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
         icon: 'zap', 
         logoUrl: 'https://cdn.simpleicons.org/react/61DAFB',
-        experienceMonths: 40 
+        experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z")  
       },
       { 
-        name: 'TypeScript', 
-        context: '1 Year 7 Months', 
+        name: 'React Native', 
+        context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
         icon: 'code', 
-        logoUrl: 'https://cdn.simpleicons.org/typescript/3178C6',
-        experienceMonths: 19 
+        logoUrl: 'https://cdn.simpleicons.org/reactnative/3178C6',
+        experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z") 
       },
       { 
-        name: 'Tailwind CSS', 
-        context: '2 Years 6 Months', 
-        icon: 'palette', 
-        logoUrl: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
-        experienceMonths: 30 
-      }
+        name: 'JavaScript', 
+        context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
+        icon: 'code', 
+        logoUrl: 'https://cdn.simpleicons.org/javascript/3178C6',
+        experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z") 
+      },
     ]
   },
   {
@@ -80,25 +81,25 @@ export const SKILL_GROUPS: SkillGroup[] = [
     skills: [
       { 
         name: 'Node.js', 
-        context: '2 Years 11 Months', 
+        context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
         icon: 'server', 
         logoUrl: 'https://cdn.simpleicons.org/nodedotjs/339933',
-        experienceMonths: 35 
+        experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z") 
       },
       { 
-        name: 'PostgreSQL', 
+        name: 'MongoDB', 
         context: '2 Years', 
         icon: 'database', 
         logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1',
         experienceMonths: 24 
       },
-      { 
-        name: 'FastAPI / Python', 
-        context: '1 Year 2 Months', 
-        icon: 'terminal', 
-        logoUrl: 'https://cdn.simpleicons.org/fastapi/05998B',
-        experienceMonths: 14 
-      }
+      // { 
+      //   name: 'FastAPI / Python', 
+      //   context: '1 Year 2 Months', 
+      //   icon: 'terminal', 
+      //   logoUrl: 'https://cdn.simpleicons.org/fastapi/05998B',
+      //   experienceMonths: 14 
+      // }
     ]
   },
   {
@@ -131,31 +132,30 @@ export const SKILL_GROUPS: SkillGroup[] = [
 
 export const EXPERIENCES: Experience[] = [
   {
-    role: 'Senior Full Stack Developer',
-    company: 'Skyline Digital',
+    role: 'Fullstack developer',
+    company: 'Maticz technologies',
     period: '2022 - Present',
     impact: [
-      'Engineered a multi-tenant SaaS platform that handles $1M+ monthly volume.',
-      'Reduced cloud infrastructure costs by 35% through container optimization.',
-      'Led a team of 4 through the migration from React 16 to 18.'
+      'Developed and optimized backend services using Node.js and MongoDB to support high-traffic applications, improving performance and data reliability.',
+      'Built cross-platform mobile applications using React Native, delivering consistent user experience across Android and iOS platforms.',
+      'Designed and deployed decentralized applications using Solidity smart contracts, enabling secure transactions and trustless workflows.'
     ]
   },
   {
-    role: 'Full Stack Engineer',
-    company: 'Nexus Innovations',
-    period: '2021 - 2022',
+    role: 'Junior software developer',
+    company: 'Maticz technologies',
+    period: '2022 - 2023',
     impact: [
-      'Developed 3 core products from scratch using the T3 Stack (Next.js, Prisma, tRPC).',
-      'Increased lighthouse performance scores across all client sites from 60 to 95+.'
+      'Built and maintained RESTful APIs using Node.js and MongoDB to support core application features.',
+      'Identified and resolved bugs, improved code quality, and contributed to stable production releases.',
     ]
   },
   {
-    role: 'Junior Web Developer',
-    company: 'Creative Labs',
-    period: '2020 - 2021',
+    role: 'Junior Java Developer',
+    company: 'Safs',
+    period: '2022 - 2022',
     impact: [
-      'Built 15+ custom WordPress and Shopify themes for high-traffic retailers.',
-      'Automated testing procedures, cutting QA time in half.'
+      'Started journey as intern as springboot developer',
     ]
   }
 ];
@@ -200,7 +200,6 @@ export const BLOG_POSTS = [
 ];
 
 export const TECH_TILES = [
-  'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 
-  'MongoDB', 'Docker', 'AWS', 'Python', 'FastAPI', 
-  'Tailwind', 'GraphQL', 'Redis', 'Framer Motion', 'Kubernetes'
+  'React', 'TypeScript', 'Node.js',
+  'MongoDB', 'Docker', 'AWS', 'Redis', "Express", "RabbitMq"
 ];
