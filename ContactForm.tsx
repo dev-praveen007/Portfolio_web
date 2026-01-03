@@ -1,8 +1,8 @@
 import React from "react";
-import { useForm, ValidationError } from "@formspree/react";
 import { Mail, Send, Github, Linkedin } from "lucide-react";
+import { useForm, ValidationError } from "@formspree/react";
 
-export default function ContactSection(): JSX.Element {
+export default function ContactSection() {
   const [state, handleSubmit] = useForm("mnngznjk");
 
   return (
@@ -33,102 +33,74 @@ export default function ContactSection(): JSX.Element {
             </div>
           </div>
 
-          {/* RIGHT PANEL (FORM) */}
-          <div className="flex-[1.4] p-6 md:p-10 lg:p-16 bg-white dark:bg-surface relative">
-            {/* Success state */}
-            {state.succeeded ? (
-              <div className="space-y-6 lg:space-y-8 text-center">
-                <div className="inline-block rounded-2xl bg-emerald-50/60 p-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 mx-auto text-emerald-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L8 11.172 4.707 7.879a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8z" clipRule="evenodd" />
-                  </svg>
-                </div>
+          {/* RIGHT PANEL */}
+          <div className="flex-[1.4] p-6 md:p-10 lg:p-16 bg-black relative">
 
-                <h3 className="text-2xl font-black">Thanks — message sent!</h3>
-                <p className="text-zinc-600 dark:text-zinc-300">
-                  I received your message and will get back to you shortly. If you need an immediate response, email me directly at{" "}
-                  <a href="mailto:praveenannadurai201@gmail.com" className="font-semibold text-accent">
-                    praveenannadurai201@gmail.com
-                  </a>.
-                </p>
+            {state.succeeded ? (
+              <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-white">
+                <h3 className="text-2xl font-black">Message Sent 🚀</h3>
+                <p className="text-white/60">I'll get back to you very soon.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-8 text-white">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
 
-                  {/* Name */}
-                  <div className="flex flex-col gap-2.5">
-                    <label className="ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60">
+                  <div className="flex flex-col">
+                    <label className="mb-2 ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-white/40">
                       Your Name
                     </label>
                     <input
-                      id="name"
                       name="name"
-                      type="text"
                       required
                       placeholder="Jane Doe"
-                      className="w-full rounded-2xl px-5 py-4 bg-white dark:bg-black/20 text-sm font-medium text-dark dark:text-white placeholder:text-dark/40 dark:placeholder:text-text-muted/40 border border-black/10 dark:border-accent/20 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
-                      aria-label="Your name"
+                      className="h-12 lg:h-14 w-full rounded-2xl px-5 bg-black/40 text-sm font-medium text-white placeholder:text-white/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                     />
                   </div>
 
-                  {/* Email */}
-                  <div className="flex flex-col gap-2.5">
-                    <label htmlFor="email" className="ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60">
-                      Email Address
+                  <div className="flex flex-col">
+                    <label className="mb-2 ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-white/40">
+                      Email
                     </label>
                     <input
-                      id="email"
                       name="email"
                       type="email"
                       required
                       placeholder="jane@example.com"
-                      className="w-full rounded-2xl px-5 py-4 bg-white dark:bg-black/20 text-sm font-medium text-dark dark:text-white placeholder:text-dark/40 dark:placeholder:text-text-muted/40 border border-black/10 dark:border-accent/20 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
-                      aria-label="Email address"
+                      className="h-12 lg:h-14 w-full rounded-2xl px-5 bg-black/40 text-sm font-medium text-white placeholder:text-white/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                     />
-                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-xs text-red-500 mt-1" />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-xs text-red-400 mt-1" />
                   </div>
 
                 </div>
 
-                {/* Summary */}
-                <div className="flex flex-col gap-2.5">
-                  <label htmlFor="message" className="ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60">
+                <div className="flex flex-col">
+                  <label className="mb-2 ml-2 text-[10px] font-black uppercase tracking-[0.25em] text-white/40">
                     Project Details
                   </label>
                   <textarea
-                    id="message"
                     name="message"
-                    required
                     rows={5}
+                    required
                     placeholder="Tell me about your vision..."
-                    className="w-full rounded-2xl px-5 py-4 bg-white dark:bg-black/20 text-sm font-medium text-dark dark:text-white placeholder:text-dark/40 dark:placeholder:text-text-muted/40 border border-black/10 dark:border-accent/20 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
-                    aria-label="Project details"
+                    className="min-h-[120px] w-full rounded-2xl px-5 py-4 bg-black/40 text-sm font-medium text-white placeholder:text-white/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
                   />
-                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-xs text-red-500 mt-1" />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-xs text-red-400 mt-1" />
                 </div>
 
                 <button
                   type="submit"
                   disabled={state.submitting}
-                  className="w-full py-3 lg:py-6 bg-dark dark:bg-accent text-white dark:text-black font-black uppercase tracking-[0.2em] text-[10px] lg:text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-accent-hover hover:shadow-xl transition-all duration-500 shadow-md group"
-                  aria-disabled={state.submitting}
+                  className="w-full py-3 lg:py-6 bg-accent text-black font-black uppercase tracking-[0.2em] text-[10px] lg:text-xs rounded-2xl flex items-center justify-center gap-3 hover:shadow-xl transition-all duration-500 disabled:opacity-50"
                 >
                   {state.submitting ? "Sending..." : "Send Inquiry"}
-                  <Send size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <Send size={14} />
                 </button>
+
               </form>
             )}
 
-            {/* Social Icons */}
-            <div className="mt-10 flex justify-center lg:justify-start gap-5">
+            <div className="mt-10 flex justify-center lg:justify-start gap-5 text-white">
               {[Github, Linkedin, Mail].map((Icon, i) => (
                 <a
                   key={i}
@@ -141,14 +113,14 @@ export default function ContactSection(): JSX.Element {
                         ? "https://www.linkedin.com/in/praveen-annadurai"
                         : "mailto:praveenannadurai201@gmail.com"
                   }
-                  className="w-12 h-12 border border-black/10 dark:border-accent/20 rounded-2xl flex items-center justify-center bg-white dark:bg-black/20 hover:bg-black hover:text-accent text-dark/60 dark:text-text-muted transition-all duration-300 shadow-sm hover:scale-110 active:scale-95 group"
+                  className="w-12 h-12 border border-white/10 rounded-2xl flex items-center justify-center bg-black/30 hover:bg-black hover:text-accent transition-all duration-300 shadow-sm hover:scale-110 active:scale-95"
                 >
                   <Icon size={20} />
                 </a>
               ))}
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </section>
