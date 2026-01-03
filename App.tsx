@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink, 
-  ChevronRight, 
-  Code2, 
-  Layers, 
-  Star, 
-  X, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  ChevronRight,
+  Code2,
+  Layers,
+  Star,
+  X,
   Menu,
   Hash,
   CheckCircle2,
@@ -30,6 +30,7 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { PROJECTS, SKILL_GROUPS, EXPERIENCES, BLOG_POSTS, TECH_TILES, TOTAL_EXPERIENCE_MONTHS } from './constants';
 import { Project } from './types';
 import Profile from './assets/Picsart_24-10-10_19-39-02-380.jpg';
+import ContactForm from './ContactForm';
 
 // --- Typed Motion Components ---
 const MotionDiv = motion.div as any;
@@ -146,7 +147,7 @@ const ThemeToggle = () => {
         <MotionDiv
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
-            background: isDark 
+            background: isDark
               ? 'radial-gradient(circle at center, rgba(134,183,57,0.1) 0%, transparent 70%)'
               : 'radial-gradient(circle at center, rgba(249,115,22,0.1) 0%, transparent 70%)'
           }}
@@ -162,14 +163,14 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
   const accentColor = '#86B739';
   if (type === 0) {
     return (
-      <MotionDiv 
+      <MotionDiv
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         className="relative w-full h-full flex items-center justify-center overflow-hidden"
       >
         <MotionSvg width="150" height="150" viewBox="0 0 200 200" fill="none" className="opacity-30 dark:opacity-15">
           <circle cx="100" cy="100" r="80" stroke={accentColor} strokeWidth="1" strokeDasharray="4 4" />
-          <MotionDiv 
+          <MotionDiv
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="origin-center"
@@ -194,14 +195,14 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
   }
   if (type === 1) {
     return (
-      <MotionDiv 
+      <MotionDiv
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         className="relative w-full h-full flex items-center justify-center"
       >
         <div className="relative glass-card p-4 rounded-2xl border-accent/20 dark:border-accent/10 w-36 h-36 flex flex-col gap-2 overflow-hidden opacity-40 dark:opacity-20">
           {[1, 2, 3, 4].map(i => (
-            <MotionDiv 
+            <MotionDiv
               key={i}
               initial={{ x: -100 }}
               whileInView={{ x: 0 }}
@@ -209,7 +210,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
               className={`h-1.5 rounded-full ${i === 1 ? 'bg-accent/40 w-10' : 'bg-dark/20 dark:bg-white/10 w-full'}`}
             />
           ))}
-          <MotionDiv 
+          <MotionDiv
             animate={{ opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 0.8 }}
             className="w-1.5 h-3 bg-accent/60 mt-1"
@@ -222,7 +223,7 @@ const ExperienceDecoration = ({ type }: { type: number }) => {
     );
   }
   return (
-    <MotionDiv 
+    <MotionDiv
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       className="relative w-full h-full flex items-center justify-center"
@@ -262,7 +263,7 @@ const Navbar = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
-    { name: 'Blog', href: '#blog' },
+    // { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -306,8 +307,8 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-black/10 dark:border-white/5 py-1.5' : 'bg-transparent py-3'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
-        <a 
-          href="#about" 
+        <a
+          href="#about"
           className="flex items-center gap-1.5 group relative"
           onMouseEnter={handleHeaderLogoHover}
         >
@@ -316,7 +317,7 @@ const Navbar = () => {
           </div>
           <span className="text-lg font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Praveen<span className="text-accent">.</span></span>
           <div className="absolute -top-3 -right-5 w-7 h-7 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-            <Lottie 
+            <Lottie
               lottieRef={lottieHeaderRef}
               autoplay={false}
               loop={false}
@@ -327,9 +328,9 @@ const Navbar = () => {
 
         <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.name}
+              href={link.href}
               className={`text-[11px] font-semibold transition-all duration-300 ${activeSection === link.href.replace('#', '') ? 'text-accent' : 'text-dark/70 dark:text-text-muted hover:text-accent'}`}
             >
               {link.name}
@@ -347,7 +348,7 @@ const Navbar = () => {
 
       <AnimatePresence>
         {mobileMenuOpen && (
-          <MotionDiv 
+          <MotionDiv
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -372,7 +373,7 @@ const Navbar = () => {
 
 const SectionHeading = ({ title, subtitle, centered = false }: { title: string; subtitle?: string; centered?: boolean }) => {
   return (
-    <MotionDiv 
+    <MotionDiv
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -388,7 +389,7 @@ const SectionHeading = ({ title, subtitle, centered = false }: { title: string; 
 
 const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> = ({ project, onOpen }) => {
   return (
-    <MotionDiv 
+    <MotionDiv
       whileHover={{ y: -6 }}
       className="group glass-card rounded-[20px] overflow-hidden border border-black/10 dark:border-white/5 shadow-sm hover:shadow-lg transition-all duration-500"
     >
@@ -404,7 +405,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
       <div className="p-5">
         <h3 className="text-lg font-bold mb-1.5 group-hover:text-accent transition-colors text-dark dark:text-text-primary">{project.title}</h3>
         <p className="text-dark/70 dark:text-text-muted text-[11px] mb-5 leading-relaxed line-clamp-2">{project.problem}</p>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <button onClick={() => onOpen(project)} className="text-accent text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 group/btn hover:text-accent-hover transition-colors">
             View Details <ArrowRight size={12} className="transition-transform group-hover/btn:translate-x-0.5" />
           </button>
@@ -412,7 +413,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
             <a href={project.links.github} className="text-dark/60 dark:text-text-muted hover:text-accent transition-colors"><Github size={14} /></a>
             <a href={project.links.live} className="text-dark/60 dark:text-text-muted hover:text-accent transition-colors"><ExternalLink size={14} /></a>
           </div>
-        </div>
+        </div> */}
       </div>
     </MotionDiv>
   );
@@ -423,7 +424,7 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
   return (
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
       <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-black/95 backdrop-blur-xl" />
-      <MotionDiv 
+      <MotionDiv
         initial={{ opacity: 0, y: 40, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 40, scale: 0.95 }}
         className="relative w-full max-w-3xl bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-[28px] overflow-hidden shadow-2xl z-10 max-h-[85vh] overflow-y-auto"
       >
@@ -486,10 +487,17 @@ export default function App() {
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
             <MotionDiv initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="relative w-full lg:flex-1 order-1 lg:order-2">
-              <div className="relative z-10 mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w dependency-container rounded-[28px] lg:rounded-[56px] overflow-hidden p-1.5 lg:p-3 group shadow-xl">
-                <img src={Profile} className="w-full h-full object-cover rounded-[20px] lg:rounded-[44px] grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" />
+              <div className="relative z-10 mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w dependency-container rounded-[28px] lg:rounded-[56px] overflow-hidden p-1.5 lg:p-3 shadow-xl">
+
+                <img
+                  src={Profile}
+                  className="w-full h-full object-cover rounded-[20px] lg:rounded-[44px] grayscale-0"
+                />
+
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent pointer-events-none" />
+
               </div>
+
               <div className="absolute -bottom-4 -left-3 lg:-bottom-6 lg:-left-6 glass-card p-4 lg:p-8 rounded-[20px] lg:rounded-[32px] border-accent/30 dark:border-accent/20 animate-float shadow-2xl z-20">
                 <div className="text-xl lg:text-4xl font-outfit font-black text-accent mb-0.5">10+</div>
                 <div className="text-[7px] font-black uppercase tracking-widest text-dark/60 dark:text-text-muted">Production Apps Deployed</div>
@@ -501,25 +509,25 @@ export default function App() {
                 <div className="w-6 lg:w-10 h-[1px] bg-accent" />
                 <span className="text-[9px] lg:text-xs font-black uppercase tracking-[0.2em] text-accent">3+ Years of Experience</span>
               </MotionDiv>
-              <MotionH1 
+              <MotionH1
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 className="text-3xl md:text-5xl lg:text-7xl font-outfit font-extrabold leading-[0.95] tracking-tighter text-dark dark:text-text-primary"
               >
                 Building <br /> <span className="text-accent">Robust</span> Digital Experiences.
               </MotionH1>
-              <MotionP 
+              <MotionP
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 className="text-sm md:text-base lg:text-lg text-dark/70 dark:text-text-muted max-w-xl mx-auto lg:mx-0 leading-relaxed"
               >
                 I'm Praveen, a Senior Full-Stack Developer crafting high-performance, scalable web applications with a focus on clean architecture and user-centric design.
               </MotionP>
-              <MotionDiv 
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                 className="flex flex-wrap gap-3 lg:gap-5 justify-center lg:justify-start"
               >
-                <a href="#projects" className="px-6 lg:px-8 py-3 lg:py-4 bg-accent text-black font-black uppercase tracking-[0.1em] text-[9px] lg:text-[10px] rounded-lg hover:bg-accent-hover hover:shadow-lg transition-all flex items-center gap-2.5">
+                {/* <a href="#projects" className="px-6 lg:px-8 py-3 lg:py-4 bg-accent text-black font-black uppercase tracking-[0.1em] text-[9px] lg:text-[10px] rounded-lg hover:bg-accent-hover hover:shadow-lg transition-all flex items-center gap-2.5">
                   View Case Studies <ArrowRight size={14} />
-                </a>
+                </a> */}
                 <a href="#contact" className="px-6 lg:px-8 py-3 lg:py-4 border border-black/20 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-dark dark:text-text-primary font-black uppercase tracking-[0.1em] text-[9px] lg:text-[10px] rounded-lg transition-all flex items-center gap-2.5">
                   Hire Me <Mail size={14} />
                 </a>
@@ -558,10 +566,10 @@ export default function App() {
       </section>
 
       {/* Featured Projects */}
-      <section id="projects" className="py-16 lg:py-32 scroll-mt-header">
+      {/* <section id="projects" className="py-16 lg:py-32 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
-          <SectionHeading 
-            title="Selected Projects" 
+          <SectionHeading
+            title="Selected Projects"
             subtitle="A curated list of technical challenges solved through innovative engineering and design."
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
@@ -570,7 +578,7 @@ export default function App() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Skills Grid */}
       <section id="skills" className="py-16 lg:py-32 bg-black/[0.01] dark:bg-white/[0.01] border-y border-black/10 dark:border-white/5 scroll-mt-header">
@@ -588,7 +596,7 @@ export default function App() {
                         <div className="flex justify-between items-center mb-2.5 lg:mb-4">
                           <div className="flex items-center gap-3 lg:gap-4">
                             <div className="w-8 h-8 lg:w-10 lg:h-10 p-1.5 lg:p-2 bg-black/[0.06] dark:bg-white/[0.05] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 border border-black/5 dark:border-transparent dark:group-hover:border-accent/10">
-                                <img src={skill.logoUrl} alt={skill.name} className="w-full h-full object-contain" />
+                              <img src={skill.logoUrl} alt={skill.name} className="w-full h-full object-contain" />
                             </div>
                             <span className="font-bold text-sm lg:text-lg text-dark dark:text-text-primary">{skill.name}</span>
                           </div>
@@ -625,13 +633,13 @@ export default function App() {
           <SectionHeading title="Experience" centered />
           <div className="space-y-10 lg:space-y-20 relative before:absolute before:top-0 before:bottom-0 before:left-5 md:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark/20 dark:before:via-white/10 before:to-transparent">
             {EXPERIENCES.map((exp, i) => (
-              <MotionDiv 
-                key={i} 
+              <MotionDiv
+                key={i}
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-full border border-black/20 dark:border-white/10 bg-white dark:bg-surface shadow-lg shrink-0 absolute left-5 md:left-1/2 -translate-x-1/2 z-10">
-                   <div className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_10px_rgba(134,183,57,0.8)]" />
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_10px_rgba(134,183,57,0.8)]" />
                 </div>
                 <div className="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] glass-card p-6 lg:p-10 rounded-[32px] border border-black/10 dark:border-white/5 ml-10 md:ml-0 hover:border-accent/40 transition-all duration-500 shadow-xl">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
@@ -687,7 +695,7 @@ export default function App() {
       </section> */}
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 lg:py-32 scroll-mt-header">
+      {/* <section id="contact" className="py-16 lg:py-32 scroll-mt-header">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-[32px] lg:rounded-[48px] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
             <div className="flex-1 p-6 md:p-10 lg:p-16 bg-accent text-black space-y-8 lg:space-y-12 shadow-inner">
@@ -707,47 +715,69 @@ export default function App() {
             </div>
             <div className="flex-[1.4] p-6 md:p-10 lg:p-16 bg-white dark:bg-surface relative">
               <form className="space-y-6 lg:space-y-8" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
-                  <div className="space-y-2.5">
-                    <label className="text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60 ml-2">Your Name</label>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-start">
+
+                  <div className="flex flex-col gap-2.5">
+                    <label className="contact-label">Your Name</label>
                     <input type="text" className="contact-input" placeholder="Jane Doe" />
                   </div>
-                  <div className="space-y-2.5">
-                    <label className="text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60 ml-2">Email Address</label>
+
+                  <div className="flex flex-col gap-2.5">
+                    <label className="contact-label">Email Address</label>
                     <input type="email" className="contact-input" placeholder="jane@example.com" />
                   </div>
+
                 </div>
-                <div className="space-y-2.5">
-                  <label className="text-[10px] font-black uppercase tracking-[0.25em] text-dark/40 dark:text-text-muted/60 ml-2">Project Details</label>
-                  <textarea rows={5} className="contact-input font-medium resize-none" placeholder="Tell me about your vision..."></textarea>
+
+                <div className="flex flex-col gap-2.5">
+                  <label className="contact-label">Project Details</label>
+                  <textarea
+                    rows={5}
+                    className="contact-input font-medium resize-none"
+                    placeholder="Tell me about your vision..."
+                  />
                 </div>
-                <button type="submit" className="w-full py-4 lg:py-6 bg-dark dark:bg-accent text-white dark:text-black font-black uppercase tracking-[0.2em] text-[10px] lg:text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-accent-hover hover:shadow-xl transition-all duration-500 shadow-md group glow-on-hover">
-                  Send Inquiry <Send size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+
+                <button
+                  type="submit"
+                  className="w-full py-3 lg:py-6 bg-dark dark:bg-accent text-white dark:text-black font-black uppercase tracking-[0.2em] text-[10px] lg:text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-accent-hover hover:shadow-xl transition-all duration-500 shadow-md group glow-on-hover"
+                >
+                  Send Inquiry
+                  <Send size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </button>
               </form>
-              
+
               <div className="mt-10 flex justify-center lg:justify-start gap-5">
                 {[Github, Linkedin, Mail].map((Icon, i) => (
-                  <a 
-                    key={i} 
-                    target="__blank"
-                    href={i === 0 ? "https://github.com/dev-praveen007" : i === 1 ? "https://www.linkedin.com/in/praveen-annadurai" : "mailto:praveenannadurai201@gmail.com" } 
+                  <a
+                    key={i}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={
+                      i === 0
+                        ? "https://github.com/dev-praveen007"
+                        : i === 1
+                          ? "https://www.linkedin.com/in/praveen-annadurai"
+                          : "mailto:praveenannadurai201@gmail.com"
+                    }
                     className="w-12 h-12 border border-black/10 dark:border-accent/20 rounded-2xl flex items-center justify-center bg-white dark:bg-black/20 hover:bg-black hover:text-accent text-dark/60 dark:text-text-muted transition-all duration-300 shadow-sm hover:scale-110 active:scale-95 group glow-on-hover"
                   >
-                    <Icon size={20} className="transition-colors" />
+                    <Icon size={20} />
                   </a>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <ContactForm />
 
       {/* Footer */}
       <footer className="py-12 lg:py-20 border-t border-black/10 dark:border-white/5 bg-white/50 dark:bg-transparent">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 lg:gap-12">
-            <div 
+            <div
               className="flex items-center gap-2 group relative cursor-pointer"
               onMouseEnter={handleFooterLogoHover}
             >
@@ -756,7 +786,7 @@ export default function App() {
               </div>
               <span className="text-xl font-outfit font-bold tracking-tight text-dark dark:text-text-primary">Praveen<span className="text-accent">.</span></span>
               <div className="absolute -top-5 -right-6 w-10 h-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                <Lottie 
+                <Lottie
                   lottieRef={lottieFooterRef}
                   autoplay={false}
                   loop={false}
