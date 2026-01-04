@@ -64,14 +64,14 @@ export const SKILL_GROUPS: SkillGroup[] = [
         name: 'React Native', 
         context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
         icon: 'code', 
-        logoUrl: 'https://cdn.simpleicons.org/reactnative/3178C6',
+        logoUrl: 'https://img.icons8.com/?size=100&id=123603&format=png&color=000000',
         experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z") 
       },
       { 
         name: 'JavaScript', 
         context: getYearMonthDiff("2022-10-04T18:30:00.000Z"), 
         icon: 'code', 
-        logoUrl: 'https://cdn.simpleicons.org/javascript/3178C6',
+        logoUrl: 'https://img.icons8.com/?size=100&id=108784&format=png&color=000000',
         experienceMonths: getMonthDifference("2022-10-04T18:30:00.000Z") 
       },
     ]
@@ -90,7 +90,14 @@ export const SKILL_GROUPS: SkillGroup[] = [
         name: 'MongoDB', 
         context: '2 Years', 
         icon: 'database', 
-        logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1',
+        logoUrl: 'https://img.icons8.com/?size=100&id=bosfpvRzNOG8&format=png&color=000000',
+        experienceMonths: 24 
+      },
+      { 
+        name: 'Express.js', 
+        context: '2 Years', 
+        icon: 'database', 
+        logoUrl: 'https://img.icons8.com/?size=100&id=WNoJgbzDr3i2&format=png&color=000000',
         experienceMonths: 24 
       },
       // { 
@@ -116,7 +123,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
         name: 'AWS', 
         context: '2 Years 2 Months', 
         icon: 'cloud', 
-        logoUrl: 'https://cdn.simpleicons.org/amazonwebservices/FF9900',
+        logoUrl: 'https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000',
         experienceMonths: 26 
       },
       { 
