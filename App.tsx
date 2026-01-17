@@ -29,7 +29,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { PROJECTS, SKILL_GROUPS, EXPERIENCES, BLOG_POSTS, TECH_TILES, TOTAL_EXPERIENCE_MONTHS } from './constants';
 import { Project } from './types';
-import Profile from './assets/Picsart_24-10-10_19-39-02-380.jpg';
+import Profile from './assets/port_image.png';
 import ContactForm from './ContactForm';
 
 // --- Typed Motion Components ---
